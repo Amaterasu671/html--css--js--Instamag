@@ -2,11 +2,7 @@ var temp;
 var first = 1;
 var second = 2;
 var third = 3;
-var nbClick1 = 0;
-var nbClick2 = 0;
-var nbClick3 = 0;
-var nbClick4 = 0;
-
+var EltAgrandi;
 
 function changeImage(x){
   document.getElementById('slide'+String(first+x)).style.zIndex = '0';
@@ -24,44 +20,106 @@ function changeImage(x){
 
 }
 
-setInterval(function() { changeImage(0); },3000);
-setInterval(function() { changeImage(3); },3500);
-setInterval(function() { changeImage(6); },3200);
-setInterval(function() { changeImage(9); },3700);
+changeSlide1 =  setInterval(function() { changeImage(0); },3000);
+changeSlide2 =  setInterval(function() { changeImage(3); },3500);
+changeSlide3 =  setInterval(function() { changeImage(6); },3200);
+changeSlide4 =  setInterval(function() { changeImage(9); },3700);
+
+function toRight(){
+  if(EltAgrandi == document.getElementById('album1')){
+    changeImage(0);
+  }
+  else if (EltAgrandi == document.getElementById('album2')){
+    changeImage(3);
+  }
+  else if (EltAgrandi == document.getElementById('album3')){
+    changeImage(6);
+  }
+  else if (EltAgrandi == document.getElementById('album4')){
+    changeImage(9);
+  }
+}
+function toLeft(){
+
+  var x;
+
+  if(EltAgrandi == document.getElementById('album1')){
+    x = 0;
+  }
+  else if (EltAgrandi == document.getElementById('album2')){
+    x = 3;
+  }
+  else if (EltAgrandi == document.getElementById('album3')){
+    x = 6;
+  }
+  else if (EltAgrandi == document.getElementById('album4')){
+    x = 9;
+  }
+
+  temp = first;
+  first = second;
+  second = third;
+  third = first;
+
+  document.getElementById('slide'+String(first+x)).style.zIndex = '0';
+  document.getElementById('slide'+String(first+x)).style.opacity = '0';
+  document.getElementById('slide'+String(second+x)).style.zIndex = '2';
+  document.getElementById('slide'+String(second+x)).style.opacity = '1';
+  document.getElementById('slide'+String(second+x)).style.transitionDuration = '2s';
+  document.getElementById('slide'+String(third+x)).style.zIndex = '1';
+  document.getElementById('slide'+String(third+x)).style.opacity = '0';
+}
 
 function agrandir(elt){
   var elem = document.getElementById(elt);
+  document.getElementById('imageLeft').style.opacity = 1;
+  document.getElementById('imageRight').style.opacity = 1;
+  document.getElementById('imageClose').style.opacity = 1;
+  document.getElementById('imageLeft').style.transitionDuration = '1s';
+  document.getElementById('imageRight').style.transitionDuration = '1s';
+  document.getElementById('imageClose').style.transitionDuration = '1s';
   if(elem === document.getElementById('album1')){
-    nbClick1++;
-    if(nbClick1%2 != 0)
-      RemettrePlace('13vw', '2vw', '0%', '0%', 'absolute', 3,'scale(1.7, 1.7)', elem);
-    else if (nbClick1%2 == 0) {
-      RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0,'scale(1, 1)', elem);
-    }
+      RemettrePlace('30vh', '-1vw', '0%', '0%', 'absolute', 3,'scale(2, 2)', elem);
+      clearInterval(changeSlide1);
+      EltAgrandi = document.getElementById('album1');
   }
   else if(elem == document.getElementById('album2')){
-    nbClick2++;
-    if(nbClick2%2 != 0)
-      RemettrePlace('13vw', '-2vw', '0%', '0%', 'absolute', 3,'scale(1.7, 1.7)', elem);
-    else if (nbClick2%2 == 0) {
-      RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', elem);
-    }
+      RemettrePlace('30vh', '1vw', '0%', '0%', 'absolute', 3,'scale(2, 2)', elem);
+      clearInterval(changeSlide2);
+      EltAgrandi = document.getElementById('album2');
   }
   else if(elem == document.getElementById('album3')){
-    nbClick3++;
-    if(nbClick3%2 != 0)
-      RemettrePlace('13vw', '2vw', '0%', '0%', 'absolute', 3,'scale(1.7, 1.7)', elem);
-    else if (nbClick3%2 == 0) {
-      RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', elem);
-    }
+      RemettrePlace('30vh', '-1vw', '0%', '0%', 'absolute', 3,'scale(2, 2)', elem);
+      clearInterval(changeSlide3);
+      EltAgrandi = document.getElementById('album3');
   }
   else if(elem == document.getElementById('album4')){
-    nbClick4++;
-    if(nbClick4%2 != 0)
-      RemettrePlace('13vw', '-2vw', '0%', '0%', 'absolute', 3,'scale(1.7, 1.7)', elem);
-    else if (nbClick4%2 == 0) {
-      RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', elem);
-    }
+      RemettrePlace('30vh', '1vw', '0%', '0%', 'absolute', 3,'scale(2, 2)', elem);
+      clearInterval(changeSlide4);
+      EltAgrandi = document.getElementById('album4');
+  }
+}
+
+function rapetisser(){
+  var element = EltAgrandi;
+  document.getElementById('imageLeft').style.opacity = 0;
+  document.getElementById('imageRight').style.opacity = 0;
+  document.getElementById('imageClose').style.opacity = 0;
+  if(element == document.getElementById('album1')){
+    RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', element);
+    changeSlide1 =  setInterval(function() { changeImage(0); },3500);
+  }
+  else if(element == document.getElementById('album2')){
+    RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', element);
+    changeSlide2 =  setInterval(function() { changeImage(3); },3500);
+  }
+  else if(element == document.getElementById('album3')){
+    RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', element);
+    changeSlide3 =  setInterval(function() { changeImage(6); },3500);
+  }
+  else if(element == document.getElementById('album4')){
+    RemettrePlace('2px', '2px', '2px', '2px', 'relative', 0, 'scale(1, 1)', element);
+    changeSlide4 =  setInterval(function() { changeImage(9); },3500);
   }
 }
 

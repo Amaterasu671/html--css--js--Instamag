@@ -1,12 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 body{
   background-color: grey;
 }
 main{
   height: 97vh;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+#instamagTitle{
+  font-family: 'Roboto Mono', monospace;
+  color: #fdf4dd;
+  margin-top: 0.8%;
+  margin-right: 20px;
+}
+.header{
+  width: 100%;
+  height: 7vh;
+  background-color: grey;
+  box-shadow: 0px 5px 50px 25px black;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+#instamagIcon{
+  margin-top: 0.2%;
+  width: 40px;
+  margin-left: 50px;
 }
 .slideContainer{
   width: 100%;
@@ -20,11 +47,29 @@ main{
 }
 .album{
   width: 48%;
-  height: 50%;
+  height: 45%;
   margin: 2px 2px 2px 2px;
   overflow: hidden;
   position: relative;
   box-shadow: 0px 5px 50px 25px black;
+}
+#imageLeft, #imageRight, #imageClose {
+  opacity: 0;
+  position: absolute;
+  z-index: 4;
+  toop: 90%;
+  left: 20%;
+  wiidth: 20px;
+  cursor: grab;
+}
+#imageRight{
+  left: 53vw;
+}
+#imageClose{
+  left: 49vw;
+}
+#imageLeft{
+  left: 45vw;
 }
 .slideContainer:hover{
   transform: scale(1.3, 1.3);
